@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Calendar.io - login
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="banner brand">
+            <h3>Calendar.ai</h3>
+        </div>
+
+        <div class="banner header">
+            <a class="login-link" href="/login">
+                <h3>Log In</h3>
+            </a>
+
+            <a class="register-link" href="/register">
+                <h3>Register</h3>
+            </a>
+        </div>
+        <div class="form-container" style="grid-column-start: 1; grid-column-end: end;">
+            <form class="login-form" action="/login" method="post">
+                <div>
+                    <input name="username" autocomplete="off" autofocus class="login-input" placeholder="Username">
+                </div>
+                <div>
+                    <input name="password" class="login-input" placeholder="Password" type="password">
+                </div>
+                <div>
+                    <button class="login-submit-button" type="submit">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

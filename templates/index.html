@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Calendar.ai
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="banner brand">
+            <h3>Calendar.ai</h3>
+        </div>
+
+        <div class="banner header">
+            <h3>October 2023</h3>
+
+            <a class="logout-link" href="/logout">
+                <h3>Log Out</h3>
+            </a>
+        </div>
+
+        <div class="taskbar">
+            <div class="taskbar-content">
+                <h3>Tasks</h3>
+
+                <div class="task-container">
+                    <table>
+                        {% for task in tasks %}
+                            <tr>
+                                <div class="task-button-stack">
+                                    <button id="task-{{ task[0] }}" class="task-button-primary">{{ task[1] }}</button>
+                                    <div id="task-{{ task[0] }}-primary-overlay" class="task-primary-overlay">
+                                        <button id="task-{{ task[0] }}-edit" class="task-button-secondary task-button-edit">Edit</button>
+                                        <form action="/delete-task" method="post">
+                                            <input name="id" value="{{ task[0] }}" hidden>
+                                            <button class="task-button-secondary task-button-delete" type="submit">Delete</button>
+                                        </form>
+                                    </div>
+                                    <div id="task-{{ task[0] }}-secondary-overlay" class="task-secondary-overlay">
+                                        <form action="/edit-task" method="post">
+                                            <input name="id" value="{{ task[0] }}" hidden>
+                                            <input name="name" class="task-input-edit" value="{{ task[1] }}">
+                                            <button class="task-button-secondary task-button-edit" style="font-size: 16px" type="submit">Edit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <form class="task-form" action="/add-task" method="post">
+                    <input name="name" autocomplete="off" autofocus class="task-name" placeholder="Task name">
+                    <button class="task-add-button" type="submit">Add</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="calendar">
+            <div class="calendar-grid">
+                <div class="weekdays-grid">
+                    {% for weekday in weekdays %}
+                        <div class="weekdays-gridbox">
+                            {{ weekday }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="hours-grid">
+                    {% for hour in range(24) %}
+                        <div class="hours-gridbox">
+                            <span class="hours">{{ '0' if hour < 10 else '' }}{{ hour }}:00</span>
+                    <!-- - {{ '0' if hour < 9 else '' }}{{ hour + 1 }}:00 -->
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="slots-grid">
+                    {% for event in events %}
+                        <button id="event-{{ event[0] }}" class="events" style="grid-column-start: {{ event[7] }}; grid-column-end: {{ event[8] }}; grid-row-start: {{ event[9] }}; grid-row-end: {{ event[10] }}">
+                            {{ event[1] }}
+                            <span class="event-data" hidden>{{ event[2] }}-{{ event[3] }}-{{ event[4] }}</span>
+                        </button>
+                    {% endfor %}
+
+                    {% for column in range(1, 8) %}
+                        {% for row in range(1, 25) %}
+                            {% if ((column - 1) * 24 + row) not in boxes_used %}
+                                <button id="slot-{{ (column - 1) * 24 + row }}" class="slots-gridbox" style="grid-column-start: {{ column }}; grid-column-end: {{ column + 1 }}; grid-row-start: {{ row }}; grid-row-end: {{ row + 1 }}" />
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Add event</h2>
+
+            <form class="event-form" action="/handle-event" method="post">
+                <input name="id" class="event-id" hidden>
+                <input name="name" autocomplete="off" autofocus class="event-name" placeholder="Event name">
+                <div class="event-weekday">
+                    <select name="weekday" class="event-weekday-select">
+                        {% for weekday in weekdays %}
+                            <option>{{ weekday }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="event-start-time">
+                    <select name="start_time" class="event-start-time-select">
+                        {% for hour in range(24) %}
+                            <option>{{ '0' if hour < 10 else '' }}{{ hour }}:00</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="event-end-time">
+                    <select name="end_time" class="event-end-time-select">
+                        {% for hour in range(1, 25) %}
+                            <option>{{ '0' if hour < 10 else '' }}{{ hour }}:00</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="event-submit-buttons">
+                    <button name="add_event" class="event-submit-button event-add" type="submit">Add</button>
+                    <button name="edit_event" class="event-submit-button event-edit" type="submit">Edit</button>
+                    <button name="delete_event" class="event-submit-button event-delete" type="submit">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

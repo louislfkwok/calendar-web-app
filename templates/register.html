@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Calendar.io - register
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="banner brand">
+            <h3>Calendar.ai</h3>
+        </div>
+
+        <div class="banner header">
+            <a class="login-link" href="/login">
+                <h3>Log In</h3>
+            </a>
+
+            <a class="register-link" href="/register">
+                <h3>Register</h3>
+            </a>
+        </div>
+        <div class="form-container" style="grid-column-start: 1; grid-column-end: end;">
+            <form class="register-form" action="/register" method="post">
+                <div>
+                    <input name="username" autocomplete="off" autofocus class="register-input" placeholder="Username">
+                </div>
+                <div>
+                    <input name="password" class="register-input" placeholder="Password" type="password">
+                </div>
+                <div>
+                    <input name="confirmation" class="register-input" placeholder="Confirm password" type="password">
+                </div>
+                <div>
+                    <button class="register-submit-button" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
