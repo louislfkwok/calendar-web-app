@@ -274,7 +274,7 @@ body {
 
 .task-name,
 .task-priority,
-.task-time-estimate,
+.task-estimate,
 .task-deadline {
     width: 90%;
     height: 30px;

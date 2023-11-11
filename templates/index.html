@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Calendar.ai
+    Calendar
 {% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="banner brand">
-            <h3>Calendar.ai</h3>
+            <h3>Calendar</h3>
         </div>
 
         <div class="banner header">
-            <h3>October 2023</h3>
+            <h3>November 2023</h3>
 
             <a class="logout-link" href="/logout">
                 <h3>Log Out</h3>
@@ -51,7 +51,7 @@
                 <form class="task-add-form" action="/add-task" method="post">
                     <input name="name" autocomplete="off" autofocus class="task-name" placeholder="Task name">
                     <input name="priority" type="number" min="1" max="5" class="task-priority" placeholder="Priority (1: Highest, 5: Lowest)">
-                    <input name="time_estimate" type="number" min="1" max="5" class="task-time-estimate" placeholder="Time estimate (hours)">
+                    <input name="estimate" type="number" min="1" max="5" class="task-estimate" placeholder="Time estimate (hours)">
                     <input name="deadline" type="datetime-local" class="task-deadline">
                     <button class="task-add-button" type="submit">Add</button>
                 </form>                       
