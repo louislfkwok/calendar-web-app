@@ -48,9 +48,16 @@
                     </table>
                 </div>
 
-                <form class="task-form" action="/add-task" method="post">
+                <form class="task-add-form" action="/add-task" method="post">
                     <input name="name" autocomplete="off" autofocus class="task-name" placeholder="Task name">
+                    <input name="priority" type="number" min="1" max="5" class="task-priority" placeholder="Priority (1: Highest, 5: Lowest)">
+                    <input name="time_estimate" type="number" min="1" max="5" class="task-time-estimate" placeholder="Time estimate (hours)">
+                    <input name="deadline" type="datetime-local" class="task-deadline">
                     <button class="task-add-button" type="submit">Add</button>
+                </form>                       
+
+                <form class="task-allocate-form" action="/allocate-tasks" method="post">
+                    <button class="task-allocate-button" type="submit">Allocate</button>
                 </form>
             </div>
         </div>
@@ -69,7 +76,6 @@
                     {% for hour in range(24) %}
                         <div class="hours-gridbox">
                             <span class="hours">{{ '0' if hour < 10 else '' }}{{ hour }}:00</span>
-                    <!-- - {{ '0' if hour < 9 else '' }}{{ hour + 1 }}:00 -->
                         </div>
                     {% endfor %}
                 </div>

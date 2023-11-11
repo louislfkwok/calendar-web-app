@@ -165,6 +165,38 @@ def add_task():
     return redirect("/")
 
 
+@app.route("/allocate-tasks", methods=["POST"])
+@login_required
+def allocate_tasks():
+    connection = sqlite3.connect("calendar.db")
+    cursor = connection.cursor()
+
+    user_id = session["user_id"]
+
+    cursor.execute(
+        "SELECT * FROM tasks WHERE user_id = ?",
+        (
+            user_id,
+        ),
+    )
+
+    tasks = cursor.fetchall()
+
+    sorted_tasks = sorted(tasks, key = lambda x : (x[2], x[4]))
+
+    # TODO: Allocate the tasks into suitable empty timeslots in the calendar, putting them in the events table in the database
+
+    for task in tasks:
+        cursor.execute("DELETE FROM tasks WHERE id = ?", (task[0],))
+    
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+
+    return redirect("/")
+
+
 @app.route("/delete-task", methods=["POST"])
 @login_required
 def delete_task():

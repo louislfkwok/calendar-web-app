@@ -39,6 +39,9 @@ CREATE TABLE
   tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name TEXT NOT NULL,
+    priority INTEGER DEFAULT 5,
+    estimate INTEGER DEFAULT 1,
+    deadline DATETIME,
     user_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id)
   );
