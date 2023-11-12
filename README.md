@@ -1,17 +1,16 @@
-# Calendar.io - Web App
-#### Video Demo:  https://youtu.be/7_M3zWFfns0
+# Calendar - Web App
 #### Description:
-Calendar.io is a web app that integrates a to-do task list and a calendar, making it easy for users to manage their events and tasks in one place.
+Calendar is a web app that integrates a to-do task list and a calendar, making it easy for users to manage their events and tasks in one place.
 
 **Technologies Used**
 
 - Front-end: HTML, CSS, JavaScript
-- Back-end: Python
+- Back-end: Python with Flask
 - Database: SQLite
 
 **Installation**
 
-To run Calendar.io locally, follow these steps:
+To run Calendar locally, follow these steps:
 
 1. Clone the repository to your local machine:
    ```bash
@@ -41,7 +40,7 @@ To run Calendar.io locally, follow these steps:
 
 3. Main Page: The main page displays your to-do list and calendar side by side.
 
-4. To-Do List: You can add, edit, or delete tasks in the to-do list.
+4. To-Do List: You can add, edit, or delete tasks in the to-do list. The app can also automatically allocate tasks into the calendar.
 
 5. Calendar: Click on an empty slot in the calendar to add an event. The date, start time, and end time will be set automatically based on the slot you clicked. Enter the event name to add it.
 
