@@ -1,7 +1,6 @@
 from flask import redirect, render_template, session
 from functools import wraps
 
-
 def apology(message, code=400):
     def escape(s):
         for old, new in [
