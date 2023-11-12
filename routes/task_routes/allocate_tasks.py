@@ -1,12 +1,14 @@
-from app import app
-from app.config.constants import WEEKDAYS
-from app.helpers import login_required
-from app.utils.bound_generators import get_bound, get_left_bound, get_right_bound
-from flask import redirect, session
+from config.constants import WEEKDAYS
+from flask import Blueprint, redirect, session
+from helpers import login_required
+from utils.bound_generators import get_bound, get_left_bound, get_right_bound
 
 import sqlite3
 
-@app.route("/allocate-tasks", methods=["POST"])
+allocate_tasks_bp = Blueprint('allocate_tasks', __name__)
+
+
+@allocate_tasks_bp.route("/allocate-tasks", methods=["POST"])
 @login_required
 def allocate_tasks():
     connection = sqlite3.connect("calendar.db")

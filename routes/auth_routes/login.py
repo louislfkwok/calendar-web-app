@@ -1,11 +1,13 @@
-from app import app
-from app.helpers import apology
-from flask import redirect, render_template, request, session
+from flask import Blueprint, redirect, render_template, request, session
+from helpers import apology
 from werkzeug.security import check_password_hash
 
 import sqlite3
 
-@app.route("/login", methods=["GET", "POST"])
+login_bp = Blueprint('login', __name__)
+
+
+@login_bp.route("/login", methods=["GET", "POST"])
 def login():
     session.clear()
 

@@ -1,10 +1,12 @@
-from app import app
-from app.helpers import login_required
-from flask import redirect, request, session
+from flask import Blueprint, redirect, request, session
+from helpers import login_required
 
 import sqlite3
 
-@app.route("/delete-task", methods=["POST"])
+delete_task_bp = Blueprint('delete_task', __name__)
+
+
+@delete_task_bp.route("/delete-task", methods=["POST"])
 @login_required
 def delete_task():
     connection = sqlite3.connect("calendar.db")

@@ -1,11 +1,13 @@
-from app import app
-from app.config.constants import WEEKDAYS
-from app.helpers import login_required
-from flask import render_template, session
+from config.constants import WEEKDAYS
+from helpers import login_required
+from flask import Blueprint, render_template, session
 
 import sqlite3
 
-@app.route("/")
+index_bp = Blueprint('index', __name__)
+
+
+@index_bp.route("/")
 @login_required
 def index():
     connection = sqlite3.connect("calendar.db")

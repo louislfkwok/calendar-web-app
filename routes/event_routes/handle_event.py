@@ -1,12 +1,14 @@
-from app import app
-from app.helpers import apology, login_required
-from app.utils.bound_generators import get_bound, get_left_bound, get_right_bound
-from app.utils.validators import check_end_time, check_start_time, check_weekday
-from flask import redirect, request, session
+from flask import Blueprint, redirect, request, session
+from helpers import apology, login_required
+from utils.bound_generators import get_bound, get_left_bound, get_right_bound
+from utils.validators import check_end_time, check_start_time, check_weekday
 
 import sqlite3
 
-@app.route("/handle-event", methods=["POST"])
+handle_event_bp = Blueprint('handle_event', __name__)
+
+
+@handle_event_bp.route("/handle-event", methods=["POST"])
 @login_required
 def handle_event():
     connection = sqlite3.connect("calendar.db")

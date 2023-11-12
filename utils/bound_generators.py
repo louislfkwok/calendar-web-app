@@ -1,4 +1,4 @@
-from app.config.constants import WEEKDAYS
+from config.constants import WEEKDAYS
 
 def get_left_bound(weekday):
     cnt = 1

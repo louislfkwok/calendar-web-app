@@ -1,11 +1,13 @@
-from app import app
-from app.helpers import apology
-from flask import redirect, render_template, request
+from flask import Blueprint, redirect, render_template, request
+from helpers import apology
 from werkzeug.security import generate_password_hash
 
 import sqlite3
 
-@app.route("/register", methods=["GET", "POST"])
+register_bp = Blueprint('register', __name__)
+
+
+@register_bp.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         connection = sqlite3.connect("calendar.db")

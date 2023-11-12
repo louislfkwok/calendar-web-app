@@ -1,10 +1,12 @@
-from app import app
-from app.helpers import apology, login_required
-from flask import redirect, request, session
+from flask import Blueprint, redirect, request, session
+from helpers import apology, login_required
 
 import sqlite3
 
-@app.route("/add-task", methods=["POST"])
+add_task_bp = Blueprint('add_task', __name__)
+
+
+@add_task_bp.route("/add-task", methods=["POST"])
 @login_required
 def add_task():
     connection = sqlite3.connect("calendar.db")

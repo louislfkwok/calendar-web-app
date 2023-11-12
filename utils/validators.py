@@ -1,4 +1,4 @@
-from app.config.constants import WEEKDAYS
+from config.constants import WEEKDAYS
 
 def check_weekday(weekday):
     return weekday in WEEKDAYS
